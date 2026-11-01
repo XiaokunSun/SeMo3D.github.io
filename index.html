@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SeMo3D: Unifying 3D Generation, Editing, and Completion via Selective Modeling</title>
+<meta name="description" content="SeMo3D unifies 3D generation, editing, and completion via selective modeling, and enables agentic 3D modeling through natural-language interaction.">
+<meta name="author" content="Xiaokun Sun, Jian Yang, Zhenyu Zhang">
+<meta property="og:title" content="SeMo3D: Unifying 3D Generation, Editing, and Completion via Selective Modeling">
+<meta property="og:description" content="One model for 3D generation, editing, and completion, with agentic modeling chains driven by natural-language interaction.">
+<meta property="og:image" content="https://xiaokunsun.github.io/SeMo3D.github.io/static/images/og-image.jpg">
+<meta property="og:url" content="https://xiaokunsun.github.io/SeMo3D.github.io/">
+<link rel="canonical" href="https://xiaokunsun.github.io/SeMo3D.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://xiaokunsun.github.io/SeMo3D.github.io/static/images/og-image.jpg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="static/images/favicon-32.png">
+<link rel="apple-touch-icon" href="static/images/apple-touch-icon.png">
+<link rel="stylesheet" href="static/css/common.css">
+<link rel="stylesheet" href="static/css/style.css">
+<link rel="stylesheet" href="static/css/agent.css">
+<link rel="stylesheet" href="static/css/interactive.css">
+<script type="importmap">
+{ "imports": { "three": "./static/vendor/three/build/three.module.min.js", "three/addons/": "./static/vendor/three/examples/jsm/" } }
+</script>
+<script src="static/js/data.js" defer></script>
+<script src="static/js/video-layout.js" defer></script>
+<script src="static/js/display-config.js" defer></script>
+<script src="static/js/media.js" defer></script>
+<script src="static/js/main.js" defer></script>
+<script src="static/js/explore.js" defer></script>
+<script src="static/js/agent-data.js" defer></script>
+<script type="module" src="static/js/agent.js"></script>
+</head>
+<body class="site">
+
+<nav class="topnav" aria-label="Sections">
+  <div class="wrap">
+    <a class="topnav-brand" href="#top"><img src="static/images/logo.png" alt="" width="28" height="32"><span class="wordmark"><span class="se">Se</span><span class="mo">Mo3D</span></span></a>
+    <div class="topnav-links" data-spy>
+      <a href="#abstract">Abstract</a><a href="#insight">Insight</a><a href="#explore">Explore</a><a href="#method">Method</a><a href="#agentic">Agentic Modeling</a><a href="#results">Comparison</a><a href="#citation">Citation</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-brand">
+      <img class="hero-logo" src="static/images/logo.png" alt="SeMo3D logo" width="667" height="768">
+      <span class="hero-wordmark wordmark"><span class="se">Se</span><span class="mo">Mo3D</span></span>
+    </div>
+    <h1 class="title">Unifying 3D Generation, Editing, and Completion <span class="nowrap"><span class="accent">via Selective Modeling</span></span></h1>
+    <p class="authors">
+      <span><a class="link" href="https://xiaokunsun.github.io" target="_blank" rel="noopener noreferrer">Xiaokun Sun</a></span>
+      <span><a class="link" href="https://scholar.google.com.hk/citations?user=6CIDtZQAAAAJ" target="_blank" rel="noopener noreferrer">Jian Yang</a></span>
+      <span><a class="link" href="https://jessezhang92.github.io" target="_blank" rel="noopener noreferrer">Zhenyu Zhang</a><sup>*</sup></span>
+    </p>
+    <p class="affils"><a class="link" href="https://njusz.nju.edu.cn/main.htm" target="_blank" rel="noopener noreferrer">Nanjing University</a><span class="correspondence"><sup>*</sup>Corresponding Author</span></p>
+    <p class="hero-name-origin"><span class="hero-name-label">Name origin:</span><span class="hero-name-formula"><strong class="se">Se</strong><strong class="mo">Mo</strong> = <strong class="se">Se</strong>lective <strong class="mo">Mo</strong>deling</span></p>
+    <div class="links">
+      <a class="btn" href="" data-soon aria-disabled="true" title="Coming soon"><svg class="ico-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M3.8423 0a1.0037 1.0037 0 0 0-.922.6078c-.1536.3687-.0438.6275.2938 1.1113l6.9185 8.3597-1.0223 1.1058a1.0393 1.0393 0 0 0 .003 1.4229l1.2292 1.3135-5.4391 6.4444c-.2803.299-.4538.823-.2971 1.1986a1.0253 1.0253 0 0 0 .9585.635.9133.9133 0 0 0 .6891-.3405l5.783-6.126 7.4902 8.0051a.8527.8527 0 0 0 .6835.2597.9575.9575 0 0 0 .8777-.6138c.1577-.377-.017-.7502-.306-1.1407l-7.0518-8.3418 1.0632-1.13a.9626.9626 0 0 0 .0089-1.3165L4.6336.4639s-.3733-.4535-.768-.463zm0 .272h.0166c.2179.0052.4874.2715.5644.3639l.005.006.0052.0055 10.169 10.9905a.6915.6915 0 0 1-.0072.945l-1.0666 1.133-1.4982-1.7724-8.5994-10.39c-.3286-.472-.352-.6183-.2592-.841a.7307.7307 0 0 1 .6704-.4401Zm14.341 1.5701a.877.877 0 0 0-.6554.2418l-5.6962 6.1584 1.6944 1.8319 5.3089-6.5138c.3251-.4335.479-.6603.3247-1.0292a1.1205 1.1205 0 0 0-.9763-.689zm-7.6557 12.2823 1.3186 1.4135-5.7864 6.1295a.6494.6494 0 0 1-.4959.26.7516.7516 0 0 1-.706-.4669c-.1119-.2682.0359-.6864.2442-.9083l.0051-.0055.0047-.0055z"/></svg>ArXiv</a>
+      <a class="btn" href="https://github.com/XiaokunSun/SeMo3D" target="_blank" rel="noopener noreferrer"><svg class="ico-fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>Code</a>
+      <a class="btn" href="" data-soon aria-disabled="true" title="Coming soon"><span class="emoji" aria-hidden="true">🤗</span>Model</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card card--teaser">
+    <div class="teaser">
+      <video autoplay loop muted playsinline preload="auto" poster="static/videos/teaser.png" width="1280" height="720">
+        <source src="static/videos/teaser.mp4" type="video/mp4">
+      </video>
+    </div>
+    <p class="tldr"><b>TL;DR</b><span class="tldr-items"><span><strong>One</strong> Unified Model</span><span><strong>Three Tasks</strong> Generation · Editing · Completion</span><span><strong>Three Modalities</strong> Image · Text · Point</span><span><strong>No</strong> Paired Editing · Completion Data</span></span></p>
+  </section>
+
+  <section id="abstract" class="card">
+    <h2 class="card-title">Abstract</h2>
+    <p class="abstract">3D generation, editing, and completion are typically treated as regenerating the complete 3D asset under task-specific constraints, even when only a local region needs modification. This leads to task isolation, inconsistency in content that should remain unchanged, and dependence on task-specific paired data. We address these issues with a key observation: the three tasks all synthesize a designated region while keeping the rest intact&mdash;the full region for generation, the target region for editing, and the missing region for completion. We term this paradigm <span class="hl hl-navy">Selective Modeling</span> and build SeMo3D upon it; it naturally unifies the three tasks, preserves unchanged content by construction, and enables training without paired editing or completion data, since any 3D asset can be partitioned into a selected region and its context. For training, we propose <span class="hl hl-orange">region-selective denoising</span>, which randomly selects regions of varying sizes on standard 3D assets and applies noise and loss only to them, jointly learning all three tasks. For architecture, we propose <span class="hl hl-navy">Omni3DiT</span>, a multi-condition 3D diffusion transformer that distinguishes regions to create from those to retain and fuses image, text, and point guidance for fine-grained control. Experiments across three benchmarks show SeMo3D surpasses state-of-the-art methods on all tasks, delivering multimodal controllability in generation and strong consistency and accuracy in editing and completion. SeMo3D further serves as a unified modeling tool for agents, enabling efficient 3D creation through natural-language interaction.</p>
+  </section>
+
+  <section id="insight" class="card">
+    <h2 class="card-title">Key Insight</h2>
+    <figure class="figure figure--para">
+      <img src="static/images/figures/para.webp" alt="(a) Holistic modeling versus (b) selective modeling for 3D generation, editing, and completion" loading="lazy" width="2400" height="1456">
+    </figure>
+    <p class="body-text">Existing methods follow (a) <span class="hl hl-orange">Holistic Modeling</span>: they regenerate the complete asset even when only a local region should change. Yet generation, editing, and completion share one structure — they synthesize a designated region while keeping the rest intact, and differ only in which region is selected: the full region, the target region, or the missing region. (b) <span class="hl hl-navy">Selective Modeling</span> models exactly this — it synthesizes only the selected region and reuses everything else.</p>
+    <div class="cols cols--3">
+      <div class="col col--green"><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Task Unification</h3><p>Instead of a separate model per task, one model and one training procedure cover all three — only the selected region changes.</p></div>
+      <div class="col col--green"><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Preservation by Construction</h3><p>Context tokens remain exactly unchanged throughout synthesis.</p></div>
+      <div class="col col--green"><h3><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>No Paired Data</h3><p>Any ordinary 3D asset splits into a selected region and its context, so editing and completion need no source–target pairs.</p></div>
+    </div>
+  </section>
+
+  <section id="explore" class="card">
+    <h2 class="card-title">Explore Selective Modeling</h2>
+
+    <div class="explorer" data-explorer>
+      <div class="explore-tabs tabs viewer-tabs" role="group" aria-label="Choose a modeling task">
+        <button type="button" data-demo-task="gen" aria-pressed="true"><i aria-hidden="true"></i>Generation</button>
+        <button type="button" data-demo-task="edit" aria-pressed="false"><i aria-hidden="true"></i>Editing</button>
+        <button type="button" data-demo-task="comp" aria-pressed="false"><i aria-hidden="true"></i>Completion</button>
+      </div>
+      <div class="explore-panel panel">
+        <div class="explore-board board">
+          <div class="explore-cases" role="group" aria-label="Choose an example" hidden>
+            <button type="button" data-demo-case="0" aria-pressed="true">Roof</button>
+            <button type="button" data-demo-case="1" aria-pressed="false">Entrance</button>
+            <button type="button" data-demo-case="2" aria-pressed="false">Extension</button>
+          </div>
+          <div class="explore-stage viewer-shell">
+              <div class="explore-meta">
+                <p class="explore-prompt" data-demo-prompt>“A small house with a pitched roof.”</p>
+                <div class="explore-legend">
+                  <span><i class="swatch-synthesized"></i>: Synthesized Region</span>
+                  <span><i class="swatch-context"></i>: Preserved Region</span>
+                  <span><svg class="swatch-selected" viewBox="0 0 20 20" aria-hidden="true"><path d="M2 5 10 1 18 5 10 9Z" fill="#6b778b" fill-opacity=".10"/><path d="M2 5 10 9 10 19 2 15Z" fill="#6b778b" fill-opacity=".15"/><path d="M10 9 18 5 18 15 10 19Z" fill="#6b778b" fill-opacity=".20"/><path d="M2 5 10 1 18 5 18 15 10 19 2 15Z" fill="none" stroke="#77808a" stroke-width="1"/></svg>: Selected Region</span>
+                </div>
+              </div>
+            <div class="explore-scene viewer-stage">
+              <canvas width="1100" height="580" tabindex="0" aria-label="Interactive block illustration. The house rotates automatically. Drag or use left and right arrow keys to rotate. Choose an example and synthesize the selected region."></canvas>
+            </div>
+            <div class="explore-controls viewer-controls">
+              <button type="button" data-demo-input aria-pressed="true">Start</button>
+              <button class="demo-primary" type="button" data-demo-play>Synthesize</button>
+              <input id="demo-progress" type="range" min="0" max="100" value="0" step="1" aria-label="Synthesis progress">
+              <button type="button" data-demo-result aria-pressed="false">End</button>
+              <output data-demo-percent for="demo-progress">0%</output>
+            </div>
+          </div>
+          <p class="sr-only" data-demo-status role="status" aria-live="polite">Full region selected.</p>
+        </div>
+      </div>
+    </div>
+    <p class="body-text explore-intro">Selective Modeling <span class="hl hl-orange">synthesizes only the selected region</span> and <span class="hl hl-navy">reuses everything else</span>. This paradigm naturally unifies all three tasks: generation selects the entire object, editing selects a target region, and completion selects a missing region.</p>
+  </section>
+
+  <section id="method" class="card">
+    <h2 class="card-title">Method</h2>
+    <figure class="figure">
+      <img src="static/images/figures/pipeline.png" alt="SeMo3D pipeline: (a) region-selective denoising and (b) Omni3DiT" loading="lazy" width="1701" height="819">
+    </figure>
+    <p class="body-text">SeMo3D instantiates selective modeling with two components. <span class="hl hl-orange">Region-Selective Denoising</span> (a) adds noise and loss only to a selected token set <span class="sym">𝒮</span> while the context <span class="sym">𝒞</span> stays clean; at inference, <span class="sym">𝒮</span> is denoised from pure noise and the clean <span class="sym">𝒞</span> is reused at every step. <span class="hl hl-navy">Omni3DiT</span> (b) is a multi-condition 3D diffusion transformer that processes both kinds of tokens together and fuses image, text, and point guidance. Point guidance is applied only in the sparse structure (SS) stage.</p>
+    <div class="cols cols--2">
+      <div class="col col--orange"><h3>Region-Selective Denoising</h3><p>Randomly selects regions of varying sizes on standard 3D assets. As the selected region grows from a small box to the full asset, one procedure spans local editing, partial completion, and full generation — no paired supervision needed.</p></div>
+      <div class="col col--navy"><h3>Omni3DiT</h3><p>Role embeddings tell noisy selected tokens from clean context; parallel image and text cross-attention plus sparse point tokens in self-attention give fine-grained, complementary control.</p></div>
+    </div>
+  </section>
+
+  <section id="agentic" class="card agent-section">
+    <h2 class="card-title">Agentic 3D Modeling</h2>
+    <div class="agent-showcase" data-agent-showcase>
+      <div class="agent-tabs tabs" role="tablist" aria-label="Agentic modeling chains">
+        <button type="button" id="agent-tab-generation" role="tab" aria-controls="agent-workspace" aria-selected="true" data-agent-chain="generation">Generation &rarr; Editing</button>
+        <button type="button" id="agent-tab-completion" role="tab" aria-controls="agent-workspace" aria-selected="false" tabindex="-1" data-agent-chain="completion">Completion &rarr; Editing</button>
+      </div>
+      <div id="agent-workspace" class="agent-workspace panel" role="tabpanel" aria-labelledby="agent-tab-generation">
+        <div class="board">
+          <h3 class="board-title">3D Modeling Workflows <span>Drag to Rotate &middot; Ctrl + Scroll to Zoom</span></h3>
+          <div class="agent-stage-container"><div class="agent-stage viewer-stage" data-agent-stage></div></div>
+          <div class="agent-prompt-strip" data-agent-prompts></div>
+          <div class="agent-case-nav"><button class="cr-arrow agent-case-arrow" type="button" aria-label="Previous modeling workflow" data-agent-prev><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 5-7 7 7 7"/></svg></button><div class="agent-cases cr-thumbs" role="group" aria-label="Choose a modeling workflow" data-agent-cases></div><button class="cr-arrow agent-case-arrow" type="button" aria-label="Next modeling workflow" data-agent-next><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m10 5 7 7-7 7"/></svg></button><span class="cr-count" data-agent-count>1 / 20</span></div>
+          <p class="sr-only" role="status" aria-live="polite" data-agent-status></p>
+        </div>
+      </div>
+    </div>
+    <p class="body-text agent-intro">SeMo3D serves as a <span class="hl hl-orange">unified modeling tool for agents</span>, enabling efficient 3D creation through <span class="hl hl-navy">natural-language interaction</span>.</p>
+  </section>
+
+  <section id="results" class="card card--results">
+    <h2 class="card-title">Comparison</h2>
+    <div class="results" data-tabs>
+      <div class="tabs" role="tablist" aria-label="Tasks">
+        <button type="button" role="tab" id="tab-gen" aria-controls="panel-gen" data-task-tab="gen" data-task="gen"><i></i>3D Generation</button>
+        <button type="button" role="tab" id="tab-edit" aria-controls="panel-edit" data-task-tab="edit" data-task="edit"><i></i>3D Editing</button>
+        <button type="button" role="tab" id="tab-comp" aria-controls="panel-comp" data-task-tab="comp" data-task="comp"><i></i>3D Completion</button>
+        <button type="button" role="tab" id="tab-multi" aria-controls="panel-multi" data-task-tab="multi" data-task="multi"><i></i>Multimodal Control</button>
+      </div>
+
+      <div class="panel" role="tabpanel" id="panel-gen" aria-labelledby="tab-gen" data-task="gen">
+        <div class="board"><h3 class="board-title">Comparison with State-of-the-Art Methods</h3><div class="js-videos" data-task="gen"></div></div>
+        <div class="board"><h3 class="board-title">Interactive 3D Results <span>Drag to Rotate · Ctrl + Scroll to Zoom · Download GLB / PLY</span></h3><div class="js-models" data-task="gen"></div></div>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-edit" aria-labelledby="tab-edit" data-task="edit" hidden>
+        <div class="board"><h3 class="board-title">Comparison with State-of-the-Art Methods</h3><div class="js-videos" data-task="edit"></div></div>
+        <div class="board"><h3 class="board-title">Interactive 3D Results <span>Source and Result Rotate in Sync · Download GLB</span></h3><div class="js-models" data-task="edit"></div></div>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-comp" aria-labelledby="tab-comp" data-task="comp" hidden>
+        <div class="board"><h3 class="board-title">Comparison with State-of-the-Art Methods</h3><div class="js-videos" data-task="comp" aria-describedby="completion-guidance-note"></div><p class="comparison-note" id="completion-guidance-note"><span class="sym">†</span> With additional sparse point guidance.</p></div>
+        <div class="board"><h3 class="board-title">Interactive 3D Results <span>Toggle Point Hints and Partial Input · Download GLB / PLY</span></h3><div class="js-models" data-task="comp"></div></div>
+      </div>
+      <div class="panel" role="tabpanel" id="panel-multi" aria-labelledby="tab-multi" data-task="multi" hidden>
+        <div class="board"><h3 class="board-title">Same Image, Different Text and Points</h3><div class="js-videos" data-task="multi"></div></div>
+        <div class="board"><h3 class="board-title">Interactive 3D Results <span>All Four Results Rotate in Sync · Download GLB / PLY</span></h3><div class="js-models" data-task="multi"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="citation" class="card">
+    <h2 class="card-title">Citation</h2>
+    <p class="citation-note">The arXiv identifier and URL will be added when available.</p>
+    <div class="bibtex" id="bibtex">
+      <button class="copy-btn" type="button" data-copy="#bibtex-code">Copy</button>
+<pre id="bibtex-code">@misc{sun2026semo3d,
+  title  = {SeMo3D: Unifying 3D Generation, Editing, and Completion via Selective Modeling},
+  author = {Sun, Xiaokun and Yang, Jian and Zhang, Zhenyu},
+  year   = {2026},
+  note   = {arXiv identifier and URL to be added}
+}</pre>
+    </div>
+  </section>
+</main>
+
+<footer class="footer"><div class="wrap">© 2026 The SeMo3D Authors</div></footer>
+</body>
+</html>

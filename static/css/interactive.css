@@ -1,0 +1,54 @@
+/* Keep Comparison's colored platforms as the shared viewer language. */
+.site { --viewer-radius: var(--radius-stage); --viewer-border: var(--line); --control-radius: var(--radius-control); }
+.site .affils { align-items: baseline; column-gap: 26px; }
+.site .affils .correspondence { margin: 0; padding: 0; border: 0; font: inherit; white-space: nowrap; }
+.viewer-stage { position: relative; overflow: hidden; }
+.v3d-canvas { height: calc(100% - var(--v3d-toolbar-height, 48px)) !important; }
+.v3d-panes, .v3d-loading { bottom: var(--v3d-toolbar-height, 48px); }
+.v3d-toolbar.viewer-controls { border: 0; background: transparent; }
+.gcase-posters { bottom: 48px; }
+/* Explore uses the same colored outer platform and white inner board. */
+.explorer { --task: var(--navy); --task-soft: var(--gen-soft); --task-tint: var(--gen-tint); --stage-bg: color-mix(in srgb, var(--task-tint) 45%, #fff); }
+.site .explore-tabs { gap: 10px; padding: 0; margin: 0; }
+.site .explore-tabs button { border-radius: 14px 14px 0 0; padding: 13px 10px; }
+.site .explore-tabs button[aria-pressed="true"] { color: var(--navy); background: var(--task-tint); }
+.site .explore-panel { padding: 22px 26px 26px; background: var(--task-tint); border-radius: 0 16px 16px 16px; }
+.site .explore-board { padding: 22px 24px 20px; border-radius: var(--radius-board); background: #fff; box-shadow: 0 1px 2px #27384a0d; }
+.site .explore-stage { background: var(--stage-bg); border: 0; border-radius: var(--radius-stage); }
+.site .explore-meta { position: static; padding: 16px 18px; gap: 24px; }
+.site .explore-prompt { font-size: 18px; }
+.site .explore-legend { background: transparent; padding: 0; font-size: 14px; }
+.site .explore-scene { border: 0; border-radius: 0; background: transparent; }
+.site .explore-controls { margin: 0 14px 12px; padding: 10px; border: 0; border-radius: 8px; background: transparent; }
+.site .explore-controls .demo-primary { background: var(--navy); border-color: var(--navy); }
+.multi-column-point, .multi-column-result { aspect-ratio: auto; }
+.multi-column video { width: 100%; height: auto; aspect-ratio: var(--clip-ar, 1); object-fit: contain; }
+.citation-note { margin: 0 0 14px; color: var(--muted); font-size: 16px; }
+.site .bibtex pre { font-size: 13px; }
+.site .bibtex .copy-btn { top: 12px; right: 12px; }
+@media (max-width: 900px) {
+  .site .explore-panel { padding: 16px 14px 18px; }
+  .site .explore-board { padding: 16px 14px; }
+}
+@media (max-width: 650px) {
+  .site .explore-tabs button { padding: 11px 4px; font-size: 15px; }
+  .site .explore-meta { gap: 12px; padding: 14px; }
+  .site .explore-controls { margin: 0 6px 8px; padding: 8px; }
+}
+@media (max-width: 480px) {
+  .site .affils { column-gap: 18px; font-size: 14px; }
+  .site .bibtex pre { padding: 18px 14px; }
+  .site .bibtex .copy-btn { padding: 6px; }
+  .site .bibtex .copy-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
+
+/* All viewer toolbars use the same button geometry; primary synthesis stays emphasized. */
+.site .explore-controls button { padding: 6px 10px; border: 1px solid var(--line); border-radius: var(--radius-control); color: var(--muted); background: #ffffffe6; font: 500 var(--viewer-control-size)/1.3 var(--sans); }
+.site .explore-controls .demo-primary { color: #fff; font-weight: 600; background: var(--navy); border-color: var(--navy); }
+.site .explore-controls .demo-primary:hover { color: var(--orange-on); background: var(--orange); border-color: var(--orange); }
+.site .explore-controls button[aria-pressed="true"] { border-color: #9bafbf; }
+.explore-controls input[type="range"] { appearance: none; -webkit-appearance: none; height: 18px; background: transparent; }
+.explore-controls input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--orange) var(--demo-progress,0%), var(--navy-highlight) var(--demo-progress,0%)); }
+.explore-controls input[type="range"]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 16px; height: 16px; margin-top: -5px; border: 0; border-radius: 50%; background: var(--orange); }
+.explore-controls input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: linear-gradient(to right, var(--orange) var(--demo-progress,0%), var(--navy-highlight) var(--demo-progress,0%)); }
+.explore-controls input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--orange); }
