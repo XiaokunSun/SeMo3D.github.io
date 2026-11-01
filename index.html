@@ -139,9 +139,9 @@
   <section id="method" class="card">
     <h2 class="card-title">Method</h2>
     <figure class="figure">
-      <img src="static/images/figures/pipeline.png" alt="SeMo3D pipeline: (a) region-selective denoising and (b) Omni3DiT" loading="lazy" width="1701" height="819">
+      <img src="static/images/figures/pipeline.png" alt="SeMo3D pipeline: (a) region-selective denoising and (b) Omni3DiT" loading="lazy" width="1759" height="855">
     </figure>
-    <p class="body-text">SeMo3D instantiates selective modeling with two components. <span class="hl hl-orange">Region-Selective Denoising</span> (a) adds noise and loss only to a selected token set <span class="sym">𝒮</span> while the context <span class="sym">𝒞</span> stays clean; at inference, <span class="sym">𝒮</span> is denoised from pure noise and the clean <span class="sym">𝒞</span> is reused at every step. <span class="hl hl-navy">Omni3DiT</span> (b) is a multi-condition 3D diffusion transformer that processes both kinds of tokens together and fuses image, text, and point guidance. Point guidance is applied only in the sparse structure (SS) stage.</p>
+    <p class="body-text">SeMo3D instantiates selective modeling with two components. <span class="hl hl-orange">Region-Selective Denoising</span> (a) adds noise and loss only to a selected token set <span class="sym">𝒮</span> while the context <span class="sym">𝒞</span> stays clean; at inference, <span class="sym">𝒮</span> is denoised from pure noise and the clean <span class="sym">𝒞</span> is reused at every step. <span class="hl hl-navy">Omni3DiT</span> (b) is a multi-condition 3D diffusion transformer that processes both kinds of tokens together and fuses image guidance with optional text and point conditions.</p>
     <div class="cols cols--2">
       <div class="col col--orange"><h3>Region-Selective Denoising</h3><p>Randomly selects regions of varying sizes on standard 3D assets. As the selected region grows from a small box to the full asset, one procedure spans local editing, partial completion, and full generation — no paired supervision needed.</p></div>
       <div class="col col--navy"><h3>Omni3DiT</h3><p>Role embeddings tell noisy selected tokens from clean context; parallel image and text cross-attention plus sparse point tokens in self-attention give fine-grained, complementary control.</p></div>
