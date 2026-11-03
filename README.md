@@ -6,7 +6,7 @@
 
 - 蓝色 `#355E8B` 与橙色 `#D9864A` 为主题色，对应浅底、高亮、边框与体素明暗由主色派生，使用暖灰背景、白色内容卡片和衬线字体。
 - 首屏展示项目标识、论文标题、命名解释与资源入口。命名解释为斜体，Se、Mo 与对应词首使用主题色。
-- 正文依次为 Abstract、Key Insight、Explore Selective Modeling、Method、Agentic 3D Modeling、Comparison、Citation；引用信息使用待补充的 arXiv 占位说明。
+- 正文依次为 Abstract、Key Insight、Explore Selective Modeling、Method、Agentic 3D Modeling、Comparison、Citation；引用采用包含标题、作者、年份和 arXiv 链接的简洁 BibTeX。
 - 选择性建模使用积木示意，默认生成模式、自动旋转；编辑和补全各有三个示例，支持合成、暂停与进度拖拽。
 - 智能体建模使用浅黄色主题，窗口名为 3D Modeling Workflows，包含 20 条生成→编辑链和 20 条补全→编辑链。每条链一行四列：图像或残缺点云输入、生成或补全结果、两次编辑结果，共 120 个结果模型。模型默认同步自动旋转，也可拖拽或重置视角；每个资产右上角提供下载按钮。输入图像使用与结果区相同的黑框和阴影。四列随窗口宽度缩放，不使用横向滚动；窄屏将简短提示放在模型下方。编辑参考图和编辑区域不展示。
 - 工作流采用与结果区一致的整块浅色 3D 舞台，不给每个资产单独加装饰边框。旋转、重置按钮位于舞台内部底部，预留 48px 工具栏空间，距底边 10px；收紧模型下方留白，让控制按钮靠近资产。舞台下方使用缩略图轮播切换案例，不加分割线，提供前后切换箭头与键盘操作，当前缩略图自动滚入可见范围。生成案例显示输入图像，补全案例显示残缺点云，并标明当前案例序号。模型仅在选中对应链后加载。窗口下方说明 SeMo3D 能够作为智能体的统一建模工具，通过自然语言交互实现高效 3D 创建。
@@ -44,8 +44,8 @@ python serve.py
 在 `index.html` 中填写：
 
 1. 作者和机构：在 `.authors`、`.affils`、`.correspondence` 中维护姓名、链接和通讯作者标记。
-2. 资源链接：填写 ArXiv、Code、Model 的 `href`，移除已开放链接的 `data-soon`、`aria-disabled` 和 `title`。全部开放后删除 `.resource-status`。
-3. 引用：更新 Citation 中的 `#bibtex-code` 和 `.citation-note`，论文公开后补充正式年份、arXiv 编号与链接。
+2. 资源链接：ArXiv 已指向 https://arxiv.org/abs/2611.02568，Code 指向研究代码仓库；Model 开放后填写其 `href` 并移除对应的 `data-soon`、`aria-disabled` 和 `title`。
+3. 引用：在 Citation 的 `#bibtex-code` 中维护标题、作者、年份和论文链接，保持复制按钮复制的内容与展示一致。
 4. 分享预览：将 `og:image` 改为部署后的完整图片地址。
 
 发布本目录的内容，包含 `.nojekyll` 和全部静态资源。构建工具、检查记录与本地备份不属于发布目录。
