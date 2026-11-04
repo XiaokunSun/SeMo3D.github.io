@@ -31,9 +31,9 @@
 .site .hero-name-formula { white-space: nowrap; }
 .site .hero-name-origin strong { font-weight: 700; color: var(--navy); }
 .site .hero-name-origin .se { color: var(--orange); }
-.site .title { max-width: 900px; margin: 14px auto 0; font: 700 31px/1.32 var(--serif); color: var(--ink); }
+.site .title { max-width: 900px; margin: 14px auto 0; font: 700 31px/1.32 var(--serif); color: var(--navy); }
 .site .title .accent { color: var(--orange); }
-.site .authors { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; margin: 20px 0 2px; font-size: 20px; color: var(--navy); }
+.site .authors { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 22px; margin: 20px 0 2px; font-size: 20px; color: var(--muted); }
 .site .authors sup, .site .affils sup { font-size: .62em; margin-left: 1px; }
 .site .authors .link, .site .affils .link { text-decoration: none; text-underline-offset: 4px; }
 .site .authors .link:hover, .site .affils .link:hover { color: var(--orange); text-decoration: underline; }
